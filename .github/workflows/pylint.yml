@@ -26,6 +26,8 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: hadolint/hadolint-action@v3.1.0
+      with:
+        dockerfile: Dockerfile
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag eol:latest
