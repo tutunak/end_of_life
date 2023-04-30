@@ -10,7 +10,7 @@ RUN chown -R eoluser:eoluser /app
 USER eoluser
 
 # Copy the requirements file into the container
-COPY --chown=appuser:appuser requirements.txt .
+COPY --chown=eoluser:eoluser requirements.txt .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --user --trusted-host pypi.python.org -r requirements.txt
