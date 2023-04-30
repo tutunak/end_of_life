@@ -28,14 +28,31 @@ def arg_parser() -> argparse.Namespace:
     return args
 
 
-def main():
-    args = arg_parser()
+def report(args) -> dict[list[dict]]:
+    eols = {}
     for product in get_all_products():
         for cycle in get_product(product):
             eol = cycle.get("eol", "")
             if str(eol).startswith(args.date):
-                print(f"{product} : Release: {cycle['cycle']} : {eol}")
-        time.sleep(1)
+                _ = eols.setdefault(eol, [])
+                _.append({"product": product, "cycle": cycle["cycle"]})
+                time.sleep(1)
+    return eols
+
+
+def report_by_eol(eols: dict[list[dict]]) -> None:
+    for eol, products in eols.items():
+        print(f"{eol}:")
+        for product in products:
+            print(f"{product['product']}: Release:{product['cycle']}")
+        print(f"{'-' * 20}\n")
+
+
+def main():
+    args = arg_parser()
+    eols = report(args)
+
+    report_by_eol(eols)
 
 
 if __name__ == '__main__':
