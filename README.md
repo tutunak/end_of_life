@@ -1,12 +1,12 @@
 # End of Life (EOL) Product Checker
 
-This project is a script to check and display products that have an end of life (EOL) date on or after a specified date using the End of Life API (https://endoflife.date/api). By default, it checks for EOL dates matching the current date.
+This project is a script to check and display products that have an end of life (EOL) date on or after a specified date using the End of Life API (https://endoflife.date/api). By default, it checks for EOL dates matching the current date. The output is grouped by EOL date.
 
 ## Features
 
 - Fetches all products from the API.
 - Filters products based on EOL date.
-- Displays the product name, release cycle, and EOL date for filtered products.
+- Groups the output by EOL date and displays the product name and release cycle for filtered products.
 - Allows users to specify a custom date for filtering.
 
 ## Dependencies
@@ -31,7 +31,7 @@ pip install -r requirements.txt
 python eol_product_checker.py
 ```
 
-By default, the script will fetch all products from the End of Life API and display those with an EOL date matching the current date.
+By default, the script will fetch all products from the End of Life API and display those with an EOL date matching the current date, grouped by EOL date.
 
 2. To specify a custom date for filtering, use the `--date` argument:
 
@@ -49,7 +49,11 @@ python eol_product_checker.py --date "2023-04-30"
 
 - `arg_parser() -> argparse.Namespace`: Parses command-line arguments and returns an argparse.Namespace object containing the parsed arguments.
 
-- `main()`: The main function that iterates through all products, fetches their release cycles, filters them based on EOL date, and displays the filtered results.
+- `report(args) -> dict[list[dict]]`: Collects EOL data for products with the specified EOL date.
+
+- `report_by_eol(eols: dict[list[dict]]) -> None`: Prints the EOL report grouped by EOL date.
+
+- `main()`: The main function that gathers EOL data and displays the grouped report.
 
 ## License
 
