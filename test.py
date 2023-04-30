@@ -1,3 +1,4 @@
+"""Unit tests for eol.py"""
 import unittest
 from unittest.mock import patch
 import requests
@@ -6,6 +7,7 @@ from eol import __elo_api_call__, get_all_products, get_product, arg_parser, rep
 
 
 class TestEloApiCall(unittest.TestCase):
+    """Unit tests for __elo_api_call__"""
     @patch("requests.get")
     def test_elo_api_call(self, mock_get):
         url = "https://api.example.com"
@@ -15,6 +17,7 @@ class TestEloApiCall(unittest.TestCase):
 
 
 class TestGetAllProducts(unittest.TestCase):
+    """Unit tests for get_all_products"""
     @patch("eol.__elo_api_call__")
     def test_get_all_products(self, mock_elo_api_call):
         get_all_products()
@@ -22,6 +25,7 @@ class TestGetAllProducts(unittest.TestCase):
 
 
 class TestGetProduct(unittest.TestCase):
+    """Unit tests for get_product"""
     @patch("eol.__elo_api_call__")
     def test_get_product(self, mock_elo_api_call):
         product_name = "test_product"
@@ -30,6 +34,7 @@ class TestGetProduct(unittest.TestCase):
 
 
 class TestArgParser(unittest.TestCase):
+    """Unit tests for arg_parser"""
     def test_arg_parser(self):
         with patch("argparse.ArgumentParser.parse_args") as mock_parse_args:
             mock_parse_args.return_value = argparse.Namespace(date="2023-04-30")
@@ -38,6 +43,7 @@ class TestArgParser(unittest.TestCase):
 
 
 class TestReport(unittest.TestCase):
+    """Unit tests for report"""
     @patch("eol.get_all_products")
     @patch("eol.get_product")
     def test_report(self, mock_get_product, mock_get_all_products):
@@ -64,6 +70,7 @@ class TestReport(unittest.TestCase):
 
 
 class TestReportByEol(unittest.TestCase):
+    """Unit tests for report_by_eol"""
     def test_report_by_eol(self):
         eols = {
             "2023-04-30": [
