@@ -1,7 +1,6 @@
 """Unit tests for eol.py"""
 import unittest
 from unittest.mock import patch
-import requests
 import argparse
 from eol import __elo_api_call__, get_all_products, get_product, arg_parser, report, report_by_eol
 
