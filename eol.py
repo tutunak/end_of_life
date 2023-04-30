@@ -1,6 +1,5 @@
 """EOL"""
 import datetime
-import time
 import argparse
 
 
@@ -42,7 +41,6 @@ def report(args) -> dict[list[dict]]:
             if str(eol).startswith(args.date):
                 _ = eols.setdefault(eol, [])
                 _.append({"product": product, "cycle": cycle["cycle"]})
-                time.sleep(1)
     return eols
 
 
