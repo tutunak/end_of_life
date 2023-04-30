@@ -5,15 +5,15 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Create a non-root user and set permissions
-RUN useradd --create-home eoluser
-RUN chown -R eoluser:eoluser /app
+RUN useradd --create-home eoluser && \
+    chown -R eoluser:eoluser /app
 USER eoluser
 
 # Copy the requirements file into the container
 COPY --chown=eoluser:eoluser requirements.txt .
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --user --trusted-host pypi.python.org -r requirements.txt
+RUN pip install --no-cache-dir --user --trusted-host pypi.python.org -r requirements.txt
 
 # Copy the Python script into the container
 COPY --chown=eoluser:eoluser eol.py .
