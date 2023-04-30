@@ -9,6 +9,7 @@ class TestEloApiCall(unittest.TestCase):
     """Unit tests for __elo_api_call__"""
     @patch("requests.get")
     def test_elo_api_call(self, mock_get):
+        """Test __elo_api_call__"""
         url = "https://api.example.com"
         product_name = "test_product"
         __elo_api_call__(url, product_name)
@@ -19,6 +20,7 @@ class TestGetAllProducts(unittest.TestCase):
     """Unit tests for get_all_products"""
     @patch("eol.__elo_api_call__")
     def test_get_all_products(self, mock_elo_api_call):
+        """Test get_all_products"""
         get_all_products()
         mock_elo_api_call.assert_called_once_with()
 
@@ -27,6 +29,7 @@ class TestGetProduct(unittest.TestCase):
     """Unit tests for get_product"""
     @patch("eol.__elo_api_call__")
     def test_get_product(self, mock_elo_api_call):
+        """Test get_product"""
         product_name = "test_product"
         get_product(product_name)
         mock_elo_api_call.assert_called_once_with(product_name=product_name)
@@ -35,6 +38,7 @@ class TestGetProduct(unittest.TestCase):
 class TestArgParser(unittest.TestCase):
     """Unit tests for arg_parser"""
     def test_arg_parser(self):
+        """Test arg_parser"""
         with patch("argparse.ArgumentParser.parse_args") as mock_parse_args:
             mock_parse_args.return_value = argparse.Namespace(date="2023-04-30")
             args = arg_parser()
@@ -46,6 +50,7 @@ class TestReport(unittest.TestCase):
     @patch("eol.get_all_products")
     @patch("eol.get_product")
     def test_report(self, mock_get_product, mock_get_all_products):
+        """Test report"""
         mock_get_all_products.return_value = ["product1", "product2"]
         mock_get_product.side_effect = [
             [
@@ -71,6 +76,7 @@ class TestReport(unittest.TestCase):
 class TestReportByEol(unittest.TestCase):
     """Unit tests for report_by_eol"""
     def test_report_by_eol(self):
+        """Test report_by_eol"""
         eols = {
             "2023-04-30": [
                 {"product": "product1", "cycle": "1.0"},

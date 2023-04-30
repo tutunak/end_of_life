@@ -12,7 +12,7 @@ URL = "https://endoflife.date/api"
 
 def __elo_api_call__(url=URL, product_name="all"):
     """Return a list of products or a list of cycles for a product"""
-    return requests.get(f"{url}/{product_name}.json").json()
+    return requests.get(f"{url}/{product_name}.json", timeout=30).json()
 
 
 def get_all_products() -> list:
